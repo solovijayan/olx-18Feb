@@ -1,0 +1,65 @@
+CREATE TABLE `user` (
+   `first_name` varchar(50) NOT NULL,
+   `last_name` varchar(50) NOT NULL,
+   `age` int(11) NOT NULL,
+   `gender` enum('Male','Female') NOT NULL,
+   `contact_number` int(11) NOT NULL,
+   `userId` varchar(15) NOT NULL,
+   `user_password` varchar(15) NOT NULL,
+   `email` varchar(30) NOT NULL,
+   `address` varchar(100) NOT NULL,
+   PRIMARY KEY (`userId`)
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `items` (
+   `item_id` int(11) NOT NULL AUTO_INCREMENT,
+   `item_name` varchar(50) NOT NULL,
+   `item_description` varchar(50) NOT NULL,
+   `item_category_id` varchar(15) NOT NULL,
+   `years_of_usage` int(11) NOT NULL,
+   `item_image` blob NOT NULL,
+   `item_price` double NOT NULL,
+   `seller` varchar(15) NOT NULL,
+   `item_sold` enum('Yes','No') NOT NULL DEFAULT 'No',
+   `postedBy` varchar(255) DEFAULT NULL,
+   `user_userId` varchar(255) DEFAULT NULL,
+   PRIMARY KEY (`item_id`),
+   KEY `item_seller_fk` (`seller`),
+   KEY `FK_3sohkfnsbdsjbva5yishy7oie` (`user_userId`),
+   CONSTRAINT `FK_3sohkfnsbdsjbva5yishy7oie` FOREIGN KEY (`user_userId`) REFERENCES `user` (`userId`),
+   CONSTRAINT `item_seller_fk` FOREIGN KEY (`seller`) REFERENCES `user` (`userId`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
+CREATE TABLE `cart` (
+   `cart_id` int(11) NOT NULL,
+   `item_id` int(11) NOT NULL,
+   `item_name` varchar(50) NOT NULL,
+   `item_description` varchar(50) NOT NULL,
+   `seller` varchar(15) NOT NULL,
+   `buyer` varchar(15) NOT NULL,
+   `item_price` double NOT NULL,
+   `buyer_id` varchar(255) DEFAULT NULL,
+   `seller_id` varchar(255) DEFAULT NULL,
+   `userId` varchar(255) DEFAULT NULL,
+   PRIMARY KEY (`cart_id`),
+   KEY `cart_seller_fk` (`seller`),
+   KEY `cart_buyer_fk` (`buyer`),
+   KEY `FK_fseyyx70522ew18q4k1ywaidc` (`userId`),
+   CONSTRAINT `FK_fseyyx70522ew18q4k1ywaidc` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`),
+   CONSTRAINT `cart_buyer_fk` FOREIGN KEY (`buyer`) REFERENCES `user` (`userId`),
+   CONSTRAINT `cart_seller_fk` FOREIGN KEY (`seller`) REFERENCES `user` (`userId`)
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ 
+ 
+ CREATE TABLE `address` (
+   `city` varchar(50) NOT NULL,
+   `sublocation` varchar(50) NOT NULL,
+   `state` int(11) NOT NULL,
+   `pincode` varchar(10) NOT NULL,
+   `country` varchar(20) NOT NULL,
+   `street` varchar(15) NOT NULL,
+   `userId` varchar(15) NOT NULL,
+   KEY `address_fk` (`userId`),
+   CONSTRAINT `address_fk` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`)
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci

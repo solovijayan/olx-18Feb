@@ -1,0 +1,8 @@
+insert into user values ('Vijayan', 'Raja', 34, 'Male', 123143, 'vija', 'raja', 'sdfsdf', 'sdfsfd');
+insert into user values ('Buyer', 'Kuja', 34, 'Female', 34143, 'kuja', 'password', 'jkhjf', 'hjkhjfd');
+
+insert into items (item_name, item_description,  item_category_id, years_of_usage, item_image, item_price, seller )
+values ('Tiago caar', 'Tiago car used', 'AUTO', 5, load_file('C:\Users\Lycan\Downloads\1.jpg'), 'vija','No');
+
+INSERT INTO `olx`.`items` (`item_id`, `item_name`, `item_description`, `item_category_id`, `years_of_usage`, `item_image`, `item_price`, `seller`, `item_sold`) 
+VALUES ('1', 'Tiago', 'Tiaggo Car', 'Auto', '4', load_file('C:/Users/Lycan/Downloads/1.jpg'), '453463', 'vija', 'No');
